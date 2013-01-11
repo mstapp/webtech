@@ -1,7 +1,7 @@
 webtech
 =======
 
-Example We application for a workshop on Web technologies.
+Example Web application for a workshop on Web technologies.
 
 ### Running on the Mac
 
