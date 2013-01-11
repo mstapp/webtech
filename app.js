@@ -29,9 +29,9 @@ $(document).ready( function() {
     };
 
     var showDataInList = function(data, list) {
-        for (var i = 0; i < data.length; i++) {
-            $('<li />').text(data[i].name).appendTo(list);
-        }
+        _.each(data, function(el) {
+            $('<li />').text(el.name).appendTo(list);
+        });
     };
 
     makeUI();
