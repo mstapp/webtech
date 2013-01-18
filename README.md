@@ -22,6 +22,14 @@ TODO
 
 # Summary of workshop sessions
 
+The goal is to get some hands-on experience with JavaScript and some Web app APIs, 
+libraries & frameworks that we'll be using, including:
+    * The DOM API
+    * [jQuery](http://jquery.com)
+    * [Underscore.js](http://underscorejs.org)
+    * [Backbone.js](http://backbonejs.org)
+    * [Marionette.js](http://marionettejs.com/)
+
 ### Session 1
 
 * Brief overview of DOM, JavaScript, jquery, & CSS.
@@ -39,13 +47,22 @@ HTML list but with slightly more complex data & HTML elements to deal with.
 
 * Review of homework projects: success? problems?
 * Reading JSON data asynchronously from a server.
-* Better rendering using underscore templates.
+* Javascript objects using prototypal inheritance
 * Responding to DOM events: choose a list to show
-    * Add another list ("topic list") to the page.
-    * Listen for onClick events, notify the other list
+    * Add another list ("topic list") to the page
+    * Listen for change events, notify the other list
     * Request the right data from the server for the chosen topic
 
 Homework: make similar changes to your table-based projects (read JSON data,
-use a template to render, add a topic list, & show the corresponding data in the
-table for the chosen topic.
+add a topic list, & show the corresponding data in the table for the chosen topic).
+
+### Session 3
+
+(Didn't get to these topics in Session 2; moving to Session 3)
+
+* Better rendering using underscore templates.
+* More object-oriented Javascript:
+    * Functional inheritance & factory methods
+    * Hiding private functions & data
+
 
