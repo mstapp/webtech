@@ -24,11 +24,12 @@ TODO
 
 The goal is to get some hands-on experience with JavaScript and some Web app APIs, 
 libraries & frameworks that we'll be using, including:
-    * The DOM API
-    * [jQuery](http://jquery.com)
-    * [Underscore.js](http://underscorejs.org)
-    * [Backbone.js](http://backbonejs.org)
-    * [Marionette.js](http://marionettejs.com/)
+
+* The DOM API
+* [jQuery](http://jquery.com)
+* [Underscore.js](http://underscorejs.org)
+* [Backbone.js](http://backbonejs.org)
+* [Marionette.js](http://marionettejs.com/)
 
 ### Session 1
 
