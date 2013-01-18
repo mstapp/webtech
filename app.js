@@ -8,12 +8,32 @@ $(document).ready( function() {
     };
 
     _.extend(ListMaker.prototype, {
+        dataType: 'artists',
+        list: undefined,
+
 
         makeUI: function() {
-            var list = this.makeListElement(this.getRootUI());
+            this.makeListElement(this.getRootUI());
+            this.fetchDataAndDisplay();
+        },
+
+        displayArtists: function() {
+            this.dataType = 'artists';
+            this.fetchDataAndDisplay();
+        },
+
+        displayCars: function() {
+            this.dataType = 'cars';
+            this.fetchDataAndDisplay();
+        },
+
+
+        // private api
+
+        fetchDataAndDisplay: function() {
             var self = this;
             var callback = function(data) {
-                self.showDataInList( data, list);
+                self.showDataInList(data, self.list);
             }
             this.getDataWithCallback(callback);
         },
@@ -23,14 +43,13 @@ $(document).ready( function() {
         },
 
         makeListElement: function(rootui) {
-            var list = $("<ul />");
-            list.appendTo(rootui);
-            return list;
+            this.list = $("<ul />");
+            this.list.appendTo(rootui);
         },
 
         getDataWithCallback: function(callback) {
             // get JSON data from server, update view w/ data asynchronously
-            var url = '/data/artists.json';
+            var url = '/data/' + this.dataType + '.json';
             console.log('get data from ' + url);
             $.getJSON(url, function (result) {
                 console.log('REST call response data = ' + JSON.stringify(result));
@@ -43,6 +62,7 @@ $(document).ready( function() {
         },
 
         showDataInList: function(data, list) {
+            list.empty();
             _.each(data, function(el) {
                 $('<li />').text(el.name).appendTo(list);
             });
@@ -51,5 +71,15 @@ $(document).ready( function() {
 
     var view = new ListMaker();
     view.makeUI();
+
+
+    $('#topics').on('change', function(e) {
+        console.log(e.type + ' event from ' + e.target.value);
+        if (e.target.value === 'artists')
+            view.displayArtists();
+        else
+            view.displayCars();
+
+    });
 
 });
