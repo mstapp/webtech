@@ -3,10 +3,12 @@ $(document).ready( function() {
 
     $('#ui').text('hello there');
 
-
     var makeUI = function() {
         var list = makeListElement(getRootUI());
-        showDataInList( getData(), list);
+        var callback = function(data) {
+            showDataInList( data, list);
+        }
+        getDataWithCallback(callback);
     };
 
     var getRootUI = function() {
@@ -19,13 +21,18 @@ $(document).ready( function() {
         return list;
     };
 
-    var getData = function() {
-        return [
-            { id:1, name:'DaVinci' },
-            { id:2, name:'Michelangelo' },
-            { id:3, name:'Cezanne' },
-            { id:4, name:'Picasso' }
-        ];
+    var getDataWithCallback = function(callback) {
+        // get JSON data from server, update view w/ data asynchronously
+        var url = '/data/artists.json';
+        console.log('get data from ' + url);
+        $.getJSON(url, function (result) {
+            console.log('REST call response data = ' + JSON.stringify(result));
+            // use data...
+            callback(result);
+        })
+        .error(function(jqXHR, textStatus, errorThrown) {
+            console.log('json error: ' + textStatus + ', error thrown: ' + errorThrown + ', text = ' + jqXHR.responseText);
+        });
     };
 
     var showDataInList = function(data, list) {

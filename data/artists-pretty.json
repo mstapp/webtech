@@ -1,0 +1,13 @@
+// This is the source for the JSON data.
+// To create that file, copy this content and strip out all comments & newlines (esp
+// newlines).
+//
+// vim:
+//      /  \n
+//      :  %s///g
+[
+    { "id": "1", "name": "DaVinci" },
+    { "id": "2", "name": "Michelangelo" },
+    { "id": "3", "name": "Cezanne" },
+    { "id": "4", "name": "Picasso" }
+]
