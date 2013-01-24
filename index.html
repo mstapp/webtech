@@ -3,6 +3,15 @@
 <head>
     <meta charset="utf-8">
     <title>Sample Web App</title>
+
+    <script type="text/html" id="list-template">
+        <ul>
+            <% _.each(obj, function(item) {
+            %>
+                <li><%= item.name %></li>
+            <% }); %>
+        </ul>
+    </script>
 </head>
 
 <body>

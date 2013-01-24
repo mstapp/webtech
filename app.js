@@ -5,42 +5,25 @@ $(document).ready( function() {
 
     var ListView = function(model){
         this.model = model;
-        this.list = undefined;
     };
 
     _.extend(ListView.prototype, {
 
+        viewRoot: '#ui',
+        template: '#list-template',
+
         initialize: function() {
+            //this.makeListElement(this.getRootUI());
+
             this.model.on('reset', this.render, this);
         },
 
-        makeUI: function() {
-            this.makeListElement(this.getRootUI());
-            this.render();
-        },
-
         render: function() {
-            console.log('view render: data = ' + JSON.stringify(model.toJSON()));
-            this.showDataInList(model.toJSON(), this.list);
-        },
-
-
-        // private api
-
-        getRootUI: function() {
-            return $('#ui');
-        },
-
-        makeListElement: function(rootui) {
-            this.list = $("<ul />");
-            this.list.appendTo(rootui);
-        },
-
-        showDataInList: function(data, list) {
-            list.empty();
-            _.each(data, function(el) {
-                $('<li />').text(el.name).appendTo(list);
-            });
+            if (!this.compiledTemplate) {
+                this.compiledTemplate = _.template( $(this.template).html() );
+            }
+            var newMarkup = this.compiledTemplate(this.model.toJSON());
+            $(this.viewRoot).html(newMarkup);
         },
     });
 
@@ -56,8 +39,6 @@ $(document).ready( function() {
     var model = new ListModel();
     var view = new ListView(model);
     view.initialize();
-
-    view.makeUI();
     model.fetch();
 
 
