@@ -20,7 +20,8 @@ $(document).ready( function() {
         },
 
         render: function() {
-            this.showDataInList(model.getData(), this.list);
+            console.log('view render: data = ' + JSON.stringify(model.toJSON()));
+            this.showDataInList(model.toJSON(), this.list);
         },
 
 
@@ -43,36 +44,13 @@ $(document).ready( function() {
         },
     });
 
-    var ListModel = function(){
-        this.dataType = 'artists';
-    };
-
-    _.extend(ListModel.prototype, Backbone.Events, {
-
-        fetch: function(callback) {
-            // get JSON data from server, update view w/ data asynchronously
-            var url = '/data/' + this.dataType + '.json';
-            console.log('get data from ' + url);
-            var self = this;
-            $.getJSON(url, function (result) {
-                console.log('REST call response data = ' + JSON.stringify(result));
-                self.data = result;
-                // notify observers that we've reset our state w/ new data
-                self.trigger('reset');
-            })
-            .error(function(jqXHR, textStatus, errorThrown) {
-                console.log('json error: ' + textStatus + ', error thrown: ' + errorThrown + ', text = ' + jqXHR.responseText);
-            });
-        },
-
-        getData: function() {
-            return this.data;
-        },
+    var ListModel = Backbone.Collection.extend({
+        url: '/data/artists.json',
+        baseUrl: '/data/',
 
         setDataType: function(type) {
-            this.dataType = type;
+            this.url = this.baseUrl + type + '.json';
         },
-
     });
 
     var model = new ListModel();
