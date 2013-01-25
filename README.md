@@ -59,7 +59,17 @@ add a topic list, & show the corresponding data in the table for the chosen topi
 
 ### Session 3
 
-(Didn't get to these topics in Session 2; moving to Session 3)
+* Refactored code into separate model & view classes, loosely coupled via events
+* Replace our hand-coded model with a Backbone.js model
+* Use a view template to render HTML
+* Use a Backbone view instead of our hand-coded one
+
+Homework: make a similar set of changes to your projects. You can use the backbone library
+from this repository (lib/backbone.js), or download from backbonejs.org.
+
+### (Later)
+
+(Didn't get to these topics in Session 2 or 3; moving to a later session...)
 
 * Better rendering using underscore templates.
 * More object-oriented Javascript:
