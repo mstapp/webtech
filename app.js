@@ -1,20 +1,11 @@
 $(document).ready( function() {
     "use strict";
 
-    $('#ui').text('hello there');
-
-    var ListView = function(model){
-        this.model = model;
-    };
-
-    _.extend(ListView.prototype, {
-
-        viewRoot: '#ui',
+    // View
+    var ListView = Backbone.View.extend({
         template: '#list-template',
 
         initialize: function() {
-            //this.makeListElement(this.getRootUI());
-
             this.model.on('reset', this.render, this);
         },
 
@@ -23,10 +14,13 @@ $(document).ready( function() {
                 this.compiledTemplate = _.template( $(this.template).html() );
             }
             var newMarkup = this.compiledTemplate(this.model.toJSON());
-            $(this.viewRoot).html(newMarkup);
+            this.$el.html(newMarkup);
+            return this;
         },
     });
 
+
+    // Model
     var ListModel = Backbone.Collection.extend({
         url: '/data/artists.json',
         baseUrl: '/data/',
@@ -36,11 +30,12 @@ $(document).ready( function() {
         },
     });
 
+
+    // Page-level controller code
     var model = new ListModel();
-    var view = new ListView(model);
+    var view = new ListView( {model: model, el:$('#ui') } );
     view.initialize();
     model.fetch();
-
 
     $('#topics').on('change', function(e) {
         console.log(e.type + ' event from ' + e.target.value);
